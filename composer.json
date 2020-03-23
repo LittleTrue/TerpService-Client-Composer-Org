@@ -1,0 +1,26 @@
+{
+    "name": "gxz/terpservice-client",
+    "type": "library",
+    "keywords": [
+        "terp-kj-pos",
+        "terpservice-sdk"
+    ],
+    "description": "KJ-Pos Client Component for TERP",
+    "license": "Apache-2.0",
+    "require": {
+        "php": ">=7.0",
+        "guzzlehttp/guzzle": "^6.2",
+        "adbario/php-dot-notation": "^2.0",
+        "pimple/pimple": "^3.0",
+        "symfony/cache": "^3.3",
+        "ext-json": "*"
+    },
+    "require-dev": {
+    },
+    "autoload": {
+        "psr-4": {
+            "kjpos\\TerpService-Client\\": "src/client/",
+            "kjpos\\TerpService-Client\\": "src/service/"
+        }
+    }
+}
