@@ -20,7 +20,8 @@ class GoodsService
     {
         $this->goodsClient = $app['goods'];
     }
-
+    
+    
     /**
      * 商品信息批量同步.
      *
