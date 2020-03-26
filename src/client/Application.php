@@ -1,8 +1,8 @@
 <?php
 
-namespace kjpos\TerpServiceClient;
+namespace kjpos\TerpClient;
 
-use kjpos\TerpServiceClient\Base\Config;
+use kjpos\TerpClient\Base\Config;
 use Pimple\Container;
 
 /**
@@ -15,9 +15,7 @@ class Application extends Container
      */
     protected $providers = [
         Base\ServiceProvider::class,
-        GoodsBasic\ServiceProvider::class,
         Goods\ServiceProvider::class,
-        Currency\ServiceProvider::class,
     ];
 
     /**

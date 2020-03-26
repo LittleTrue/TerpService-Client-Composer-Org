@@ -1,13 +1,13 @@
 <?php
 
-namespace kjpos\TerpServiceClient\Goods;
+namespace kjpos\TerpClient\Goods;
 
-use kjpos\TerpServiceClient\Application;
-use kjpos\TerpServiceClient\Base\BaseClient;
-use kjpos\TerpServiceClient\Base\Exceptions\ClientError;
+use kjpos\TerpClient\Application;
+use kjpos\TerpClient\Base\BaseClient;
+use kjpos\TerpClient\Base\Exceptions\ClientError;
 
 /**
- * 店铺请求客户端.
+ * 商品请求客户端.
  */
 class Client extends BaseClient
 {
@@ -21,42 +21,10 @@ class Client extends BaseClient
      *
      * @throws ClientError
      */
-    public function batchPushGoods(array $infos, array $config): array
+    public function batchPushGoods(array $infos): array
     {
         $this->setParams($infos);
-        $this->app['config']->set('service_host', $config);  //更新配置
 
-        $this->baseUri = $this->app['config']->get('service_host.bill_uri'); //设置接口host
-
-        return $this->httpPostJson('sync/batchProduct');
-    }
-
-    /**
-     * 商品条码批量同步.
-     *
-     * @throws ClientError
-     */
-    public function batchPushBarcodes(array $infos, array $config): array
-    {
-        $this->setParams($infos);
-        $this->app['config']->set('service_host', $config); //更新配置
-
-        $this->baseUri = $this->app['config']->get('service_host.bill_uri'); //设置接口host
-
-        return $this->httpPostJson('sync/batchBarCode');
-    }
-
-    /**
-     * 商品条码批量删除同步.
-     *
-     * @throws ClientError
-     */
-    public function batchPushDeteleBarcodes(array $infos, array $config): array
-    {
-        $this->setParams($infos);
-        $this->app['config']->set('service_host', $config); //更新配置
-
-        $this->baseUri = $this->app['config']->get('service_host.bill_uri'); //设置接口host
-        return $this->httpDeleteJson('sync/batchBarCode');
+        return $this->httpPostJson('/goods_base/receiveGoodsBrand');
     }
 }

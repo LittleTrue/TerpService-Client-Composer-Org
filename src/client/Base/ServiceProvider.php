@@ -1,6 +1,6 @@
 <?php
 
-namespace kjpos\TerpServiceClient\Base;
+namespace kjpos\TerpClient\Base;
 
 use GuzzleHttp\Client as GuzzleHttp;
 use GuzzleHttp\RequestOptions;

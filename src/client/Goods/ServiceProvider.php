@@ -1,6 +1,6 @@
 <?php
 
-namespace kjpos\TerpServiceClient\Goods;
+namespace kjpos\TerpClient\Goods;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;

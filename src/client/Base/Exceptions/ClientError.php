@@ -1,6 +1,6 @@
 <?php
 
-namespace kjpos\TerpServiceClient\Base\Exceptions;
+namespace kjpos\TerpClient\Base\Exceptions;
 
 /**
  * Class ClientError.

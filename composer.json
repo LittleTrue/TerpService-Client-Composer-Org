@@ -19,8 +19,8 @@
     },
     "autoload": {
         "psr-4": {
-            "kjpos\\TerpService-Client\\": "src/client/",
-            "kjpos\\TerpService-Client\\": "src/service/"
+            "kjpos\\TerpClient\\": "src/client/",
+            "kjpos\\TerpService\\": "src/service/"
         }
     }
 }

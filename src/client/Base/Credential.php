@@ -1,10 +1,10 @@
 <?php
 
-namespace kjpos\TerpServiceClient\Base;
+namespace kjpos\TerpClient\Base;
 
 use GuzzleHttp\RequestOptions;
-use kjpos\TerpServiceClient\Application;
-use kjpos\TerpServiceClient\Base\Exceptions\ClientError;
+use kjpos\TerpClient\Application;
+use kjpos\TerpClient\Base\Exceptions\ClientError;
 
 /**
  * 身份验证.
@@ -36,10 +36,9 @@ class Credential
 
         $result = $this->request(
             'POST',
-            $this->app['config']->get('service_host.basics_uri') . 'login/login',
+            $this->app['config']->get('basics_uri') . '/login/login',
             [
                 RequestOptions::JSON    => $this->credentials(),
-                RequestOptions::HEADERS => ['Sign-Type'=> 1],
             ]
         );
         $this->setToken($token = $result['data']['token'], 7000);
@@ -65,9 +64,8 @@ class Credential
     protected function credentials(): array
     {
         return [
-            'server_id' => $this->app['config']->get('service_host.id'),
-            'username'  => $this->app['config']->get('service_host.user_name'),
-            'passwd'    => $this->app['config']->get('service_host.passwd'),
+            'username'  => $this->app['config']->get('user_name'),
+            'passwd'    => $this->app['config']->get('passwd'),
         ];
     }
 
@@ -76,6 +74,6 @@ class Credential
      */
     protected function cacheKey(): string
     {
-        return 'TerpServiceClient.Token.' . md5(json_encode($this->credentials()));
+        return 'terp-service-client:' . md5(json_encode($this->credentials()));
     }
 }

@@ -1,10 +1,10 @@
 <?php
 
-namespace kjpos\TerpServiceClient\Base;
+namespace kjpos\TerpClient\Base;
 
 use GuzzleHttp\RequestOptions;
-use kjpos\TerpServiceClient\Application;
-use kjpos\TerpServiceClient\Base\Exceptions\ClientError;
+use kjpos\TerpClient\Application;
+use kjpos\TerpClient\Base\Exceptions\ClientError;
 
 /**
  * 底层请求.
@@ -34,16 +34,6 @@ class BaseClient
     }
 
     /**
-     * Set baseUri params.
-     *
-     * @param string $baseUri 基础URI
-     */
-    public function setBaseUri(string $baseUri): void
-    {
-        $this->baseUri = $baseUri;
-    }
-
-    /**
      * Set json params.
      *
      * @param array $json Json参数
@@ -64,6 +54,18 @@ class BaseClient
     }
 
     /**
+     * Make a get request.
+     *
+     * @throws ClientError
+     */
+    public function httpGet(string $uri, array $options = []): array
+    {
+        $options = $this->_headers($options);
+
+        return $this->request('GET', $uri, $options);
+    }
+
+    /**
      * Make a post request.
      *
      * @throws ClientError
@@ -71,38 +73,6 @@ class BaseClient
     public function httpPostJson(string $uri): array
     {
         return $this->requestPost($uri, [RequestOptions::JSON => $this->json]);
-    }
-
-    /**
-     * Make a delete request.
-     *
-     * @throws ClientError
-     */
-    public function httpDeleteJson(string $uri): array
-    {
-        return $this->requestDelete($uri, [RequestOptions::JSON => $this->json]);
-    }
-
-    /**
-     * Make a Put request.
-     */
-    public function httpPutJson(string $uri): array
-    {
-        return $this->requestPut($uri, [RequestOptions::JSON=>$this->json]);
-    }
-
-    /**
-     * Make a get request.
-     *
-     * @throws ClientError
-     */
-    public function httpGet(string $uri): array
-    {
-        return $this->request('GET', $uri, [
-            RequestOptions::HEADERS=> [
-                'Account-Token' => $this->app['credential']->token(),
-            ],
-        ]);
     }
 
     /**
@@ -116,37 +86,21 @@ class BaseClient
     }
 
     /**
-     * @throws ClientError
-     */
-    protected function requestDelete(string $uri, array $options = []): array
-    {
-        $options = $this->_headers($options);
-
-        return $this->request('DELETE', $uri, $options);
-    }
-
-    /**
-     * @throws ClientError
-     */
-    protected function requestPut(string $uri, array $options = []): array
-    {
-        $options = $this->_headers($options);
-
-        return $this->request('PUT', $uri, $options);
-    }
-
-    /**
      * set Headers.
      *
      * @return array
      */
     private function _headers(array $options = [])
     {
+        $token = $this->app['credential']->token();
+        $time = time();
+
         $options[RequestOptions::HEADERS] = [
-            'Account-Token' => $this->app['credential']->token(),
-            'Content-Type'  => 'application/json',
-            'Language'      => $this->language,
-            'Sign-Type'     => 1,
+            'Content-Type'          => 'application/json',
+            'Language'              => $this->language,
+            'timestamp'             => $time,
+            'token'         => $token,
+            'sign'                  => md5($token . $time),
         ];
         return $options;
     }
