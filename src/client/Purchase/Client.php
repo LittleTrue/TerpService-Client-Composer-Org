@@ -15,4 +15,16 @@ class Client extends BaseClient
     {
         parent::__construct($app);
     }
+
+    /**
+     * 采购单批量同步.
+     *
+     * @throws ClientError
+     */
+    public function batchPushPurchase(array $infos)
+    {
+        $this->setParams($infos);
+
+        return $this->httpPostJson('/api/cross_border/instockbill');
+    }
 }

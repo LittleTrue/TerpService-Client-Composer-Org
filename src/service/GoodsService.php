@@ -34,6 +34,7 @@ class GoodsService
             throw new ClientError('参数缺失', 1000001);
         }
 
+        //校验必须字段与数据
         return $this->goodsClient->batchPushGoods($infos);
     }
 }
