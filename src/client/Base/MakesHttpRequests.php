@@ -37,6 +37,13 @@ trait MakesHttpRequests
      */
     protected function transformResponse(Response $response): array
     {
+        if (200 != $response->getStatusCode()) {
+            throw new ClientError(
+                "接口连接异常，异常码：{$response->getStatusCode()}，请联系管理员",
+                $response->getStatusCode()
+            );
+        }
+
         $result = json_decode($response->getBody()->getContents(), true);
 
         switch ($result['code']) {
@@ -49,7 +56,6 @@ trait MakesHttpRequests
                 $credential->token();
                 throw new ClientError($result['message'], $result['code']);
             case 200:
-
                 return $result;
             default:
                 throw new ClientError($result['message'], $result['code']);

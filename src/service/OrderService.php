@@ -34,6 +34,7 @@ class OrderService
 
         //校验必须字段与数据
 
-        return $this->orderClient->batchPushOrder($infos);
+        $response =  $this->orderClient->batchPushOrder($infos);
+        return $response['data'];
     }
 }

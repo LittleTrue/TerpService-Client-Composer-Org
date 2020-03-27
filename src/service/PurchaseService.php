@@ -34,7 +34,8 @@ class PurchaseService
         }
 
         //校验必须字段与数据
+        $response =  $this->purchaseClient->batchPushPurchase($infos);
 
-        return $this->purchaseClient->batchPushPurchase($infos);
+        return $response['data'];
     }
 }

@@ -35,6 +35,7 @@ class GoodsService
         }
 
         //校验必须字段与数据
-        return $this->goodsClient->batchPushGoods($infos);
+        $response = $this->goodsClient->batchPushGoods($infos);
+        return $response['data'];
     }
 }

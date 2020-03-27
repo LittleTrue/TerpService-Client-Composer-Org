@@ -25,6 +25,6 @@ class Client extends BaseClient
     {
         $this->setParams($infos);
 
-        return $this->httpPostJson('/goods_base/receiveGoodsBrand');
+        return $this->httpPostJson('/api/cross_border/savenewgoods');
     }
 }

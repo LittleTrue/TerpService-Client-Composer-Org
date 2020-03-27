@@ -34,7 +34,8 @@ class AllocateService
         }
         
         //校验必须字段与数据
-
-        return $this->allocateClient->batchPushAllocate($infos);
+        $response = $this->allocateClient->batchPushAllocate($infos);
+        
+        return $response['data'];
     }
 }
