@@ -33,8 +33,12 @@ class PurchaseService
             throw new ClientError('参数缺失', 1000001);
         }
 
-        //校验必须字段与数据
-        $response =  $this->purchaseClient->batchPushPurchase($infos);
+        //校验必须字段与数据, 数据结构
+        if (!isset($infos['in_stock_bill']) || !is_array($infos['in_stock_bill'])) {
+            throw new ClientError('数组参数缺失', 1000001);
+        }
+        
+        $response = $this->purchaseClient->batchPushPurchase($infos);
 
         return $response['data'];
     }

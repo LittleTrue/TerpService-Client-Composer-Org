@@ -34,7 +34,15 @@ class GoodsService
             throw new ClientError('参数缺失', 1000001);
         }
 
-        //校验必须字段与数据
+        //校验必须字段与数据, 数据结构
+        if (!isset($infos['goods']) || !is_array($infos['goods'])) {
+            throw new ClientError('商品数组参数缺失', 1000001);
+        }
+
+        if (!isset($infos['user_info']) || !is_array($infos['user_info'])) {
+            throw new ClientError('用户信息数组参数缺失', 1000001);
+        }
+
         $response = $this->goodsClient->batchPushGoods($infos);
         return $response['data'];
     }
