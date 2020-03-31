@@ -5,6 +5,13 @@
         "terp-kj-pos",
         "terpservice-sdk"
     ],
+    "authors": [
+        {
+            "name": "littleTrue",
+            "email": "644812368@qq.com",
+            "homepage": "https://www.jianshu.com/u/8775ddf16c8b"
+        }
+    ],
     "description": "KJ-Pos Client Component for TERP",
     "license": "Apache-2.0",
     "require": {
