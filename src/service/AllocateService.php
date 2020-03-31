@@ -27,7 +27,7 @@ class AllocateService
      * @throws ClientError
      * @throws \Exception
      */
-    public function batchPushAllocate(array $infos): array
+    public function batchPushAllocate(array $infos)
     {
         if (empty($infos)) {
             throw new ClientError('参数缺失', 1000001);

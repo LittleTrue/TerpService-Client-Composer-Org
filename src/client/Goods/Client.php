@@ -21,7 +21,7 @@ class Client extends BaseClient
      *
      * @throws ClientError
      */
-    public function batchPushGoods(array $infos): array
+    public function batchPushGoods(array $infos)
     {
         $this->setParams($infos);
 

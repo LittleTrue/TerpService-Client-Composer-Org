@@ -28,7 +28,7 @@ class GoodsService
      * @throws ClientError
      * @throws \Exception
      */
-    public function batchPushGoods(array $infos): array
+    public function batchPushGoods(array $infos)
     {
         if (empty($infos)) {
             throw new ClientError('参数缺失', 1000001);

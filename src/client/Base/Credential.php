@@ -24,26 +24,36 @@ class Credential
     }
 
     /**
-     * Get token.
+     * Get token - 基于auth2.0.
      *
      * @throws ClientError
      */
-    public function token(): string
+    // public function token()
+    // {
+    //     if ($value = $this->app['cache']->get($this->cacheKey())) {
+    //         return $value;
+    //     }
+
+    //     $result = $this->request(
+    //         'POST',
+    //         $this->app['config']->get('basics_uri') . '/login/login',
+    //         [
+    //             RequestOptions::JSON    => $this->credentials(),
+    //         ]
+    //     );
+    //     $this->setToken($token = $result['data']['token'], 7000);
+
+    //     return $token;
+    // }
+
+    /** 
+     * Get token - 快速通信 -- 基于持久化用户token.
+     *
+     * @throws ClientError
+     */
+    public function token()
     {
-        if ($value = $this->app['cache']->get($this->cacheKey())) {
-            return $value;
-        }
-
-        $result = $this->request(
-            'POST',
-            $this->app['config']->get('basics_uri') . '/login/login',
-            [
-                RequestOptions::JSON    => $this->credentials(),
-            ]
-        );
-        $this->setToken($token = $result['data']['token'], 7000);
-
-        return $token;
+        return $this->app['config']->get('token');
     }
 
     /**
@@ -51,7 +61,7 @@ class Credential
      *
      * @param null $ttl
      */
-    public function setToken(string $token, $ttl = null): Credential
+    public function setToken(string $token, $ttl = null)
     {
         $this->app['cache']->set($this->cacheKey(), $token, $ttl);
 
@@ -61,7 +71,7 @@ class Credential
     /**
      * Get credentials.
      */
-    protected function credentials(): array
+    protected function credentials()
     {
         return [
             'username'  => $this->app['config']->get('user_name'),
@@ -72,7 +82,7 @@ class Credential
     /**
      * Get cachekey.
      */
-    protected function cacheKey(): string
+    protected function cacheKey()
     {
         return 'terp-service-client:' . md5(json_encode($this->credentials()));
     }

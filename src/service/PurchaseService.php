@@ -27,7 +27,7 @@ class PurchaseService
      * @throws ClientError
      * @throws \Exception
      */
-    public function batchPushPurchase(array $infos) : array
+    public function batchPushPurchase(array $infos)
     {
         if (empty($infos)) {
             throw new ClientError('参数缺失', 1000001);

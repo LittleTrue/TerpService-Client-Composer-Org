@@ -23,10 +23,10 @@ trait MakesHttpRequests
     /**
      * @throws ClientError
      */
-    public function request(string $method, string $uri, array $options = []): array
+    public function request(string $method, string $uri, array $options = [])
     {
         $uri = $this->app['config']->get('base_uri') . $uri;
-
+        
         $response = $this->app['http_client']->request($method, $uri, $options);
 
         return $this->transform ? $this->transformResponse($response) : $response;
@@ -35,7 +35,7 @@ trait MakesHttpRequests
     /**
      * @throws ClientError
      */
-    protected function transformResponse(Response $response): array
+    protected function transformResponse(Response $response)
     {
         if (200 != $response->getStatusCode()) {
             throw new ClientError(

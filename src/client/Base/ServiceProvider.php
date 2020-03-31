@@ -25,8 +25,9 @@ class ServiceProvider implements ServiceProviderInterface
             return new Credential($app);
         };
 
-        $app['cache'] = function ($app) {
-            return new RedisCache($app['config']['redis_client']);
-        };
+        //token机制暂时持久化
+        // $app['cache'] = function ($app) {
+        //     return new RedisCache($app['config']['redis_client']);
+        // };
     }
 }

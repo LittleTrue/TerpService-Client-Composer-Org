@@ -26,13 +26,15 @@ class OrderService
      *
      * @throws ClientError
      */
-    public function batchPushOrder(array $infos) : array
+    public function batchPushOrder(array $infos)
     {
         if (empty($infos)) {
             throw new ClientError('参数缺失', 1000001);
         }
 
         //校验必须字段与数据
+        
+
 
         $response =  $this->orderClient->batchPushOrder($infos);
         return $response['data'];

@@ -38,7 +38,7 @@ class BaseClient
      *
      * @param array $json Json参数
      */
-    public function setParams(array $json): void
+    public function setParams(array $json)
     {
         $this->json = $json;
     }
@@ -48,7 +48,7 @@ class BaseClient
      *
      * @param string $language 请求头中的语种标识
      */
-    public function setLanguage(string $language): void
+    public function setLanguage(string $language)
     {
         $this->language = $language;
     }
@@ -58,7 +58,7 @@ class BaseClient
      *
      * @throws ClientError
      */
-    public function httpGet(string $uri, array $options = []): array
+    public function httpGet(string $uri, array $options = [])
     {
         $options = $this->_headers($options);
 
@@ -70,7 +70,7 @@ class BaseClient
      *
      * @throws ClientError
      */
-    public function httpPostJson(string $uri): array
+    public function httpPostJson(string $uri)
     {
         return $this->requestPost($uri, [RequestOptions::JSON => $this->json]);
     }
@@ -78,7 +78,7 @@ class BaseClient
     /**
      * @throws ClientError
      */
-    protected function requestPost(string $uri, array $options = []): array
+    protected function requestPost(string $uri, array $options = [])
     {
         $options = $this->_headers($options);
 
@@ -99,7 +99,6 @@ class BaseClient
             'Content-Type'          => 'application/json',
             'Language'              => $this->language,
             'timestamp'             => $time,
-            'token'         => $token,
             'sign'                  => md5($token . $time),
         ];
         return $options;
