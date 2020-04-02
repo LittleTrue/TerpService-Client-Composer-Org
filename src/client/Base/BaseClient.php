@@ -48,7 +48,7 @@ class BaseClient
      *
      * @param string $language 请求头中的语种标识
      */
-    public function setLanguage(string $language)
+    public function setLanguage($language)
     {
         $this->language = $language;
     }
@@ -58,7 +58,7 @@ class BaseClient
      *
      * @throws ClientError
      */
-    public function httpGet(string $uri, array $options = [])
+    public function httpGet($uri, array $options = [])
     {
         $options = $this->_headers($options);
 
@@ -70,7 +70,7 @@ class BaseClient
      *
      * @throws ClientError
      */
-    public function httpPostJson(string $uri)
+    public function httpPostJson($uri)
     {
         return $this->requestPost($uri, [RequestOptions::JSON => $this->json]);
     }
@@ -78,7 +78,7 @@ class BaseClient
     /**
      * @throws ClientError
      */
-    protected function requestPost(string $uri, array $options = [])
+    protected function requestPost($uri, array $options = [])
     {
         $options = $this->_headers($options);
 

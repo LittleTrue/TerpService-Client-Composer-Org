@@ -23,7 +23,7 @@ trait MakesHttpRequests
     /**
      * @throws ClientError
      */
-    public function request(string $method, string $uri, array $options = [])
+    public function request($method, $uri, array $options = [])
     {
         $uri = $this->app['config']->get('base_uri') . $uri;
         
@@ -52,9 +52,19 @@ trait MakesHttpRequests
             case 3003:
                 /** @var Credential $credential */
                 $credential = $this->app['credential'];
-                $credential->setToken('');
+                //$credential->setToken('');
                 $credential->token();
                 throw new ClientError($result['msg'], $result['code']);
+            case 1002967:
+                //该种错误需要额外解析数组, 此时针对商品信息, 统一处理错误信息
+                $error_arr = $result['data'];
+
+                $total_message = '';
+
+                foreach ($error_arr as $key => $value) {
+                    $total_message .= $value['msg'] .  ' || ';
+                }
+                throw new ClientError($total_message, $result['code']);
             case 200:
                 return $result;
             default:

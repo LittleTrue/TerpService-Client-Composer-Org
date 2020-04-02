@@ -61,7 +61,7 @@ class Credential
      *
      * @param null $ttl
      */
-    public function setToken(string $token, $ttl = null)
+    public function setToken($token, $ttl = null)
     {
         $this->app['cache']->set($this->cacheKey(), $token, $ttl);
 
