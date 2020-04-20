@@ -18,6 +18,7 @@ class Application extends Container
         Goods\ServiceProvider::class,
         Purchase\ServiceProvider::class,
         Allocate\ServiceProvider::class,
+        AllocateTime\ServiceProvider::class,
         Order\ServiceProvider::class,
     ];
 
