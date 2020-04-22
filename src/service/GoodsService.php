@@ -20,8 +20,7 @@ class GoodsService
     {
         $this->goodsClient = $app['goods'];
     }
-    
-    
+
     /**
      * 商品信息批量同步.
      *
@@ -45,5 +44,49 @@ class GoodsService
 
         $response = $this->goodsClient->batchPushGoods($infos);
         return $response['data'];
+    }
+
+    /**
+     * 商品采购价格的同步.
+     *
+     * @throws ClientError
+     * @throws \Exception
+     */
+    public function batchGoodsPurchasePrice(array $infos)
+    {
+        if (empty($infos)) {
+            throw new ClientError('参数缺失', 1000001);
+        }
+
+        //校验必须字段与数据, 数据结构
+        if (!isset($infos['sale_price']) || !is_array($infos['sale_price'])) {
+            throw new ClientError('商品数组参数缺失', 1000001);
+        }
+
+        $response = $this->goodsClient->batchGoodsPurchasePrice($infos);
+
+        return true;
+    }
+
+    /**
+     * 商品门店配送价格同步.
+     *
+     * @throws ClientError
+     * @throws \Exception
+     */
+    public function batchGoodsDeliveryPrice(array $infos)
+    {
+        if (empty($infos)) {
+            throw new ClientError('参数缺失', 1000001);
+        }
+
+        //校验必须字段与数据, 数据结构
+        if (!isset($infos['purchase_price']) || !is_array($infos['purchase_price'])) {
+            throw new ClientError('商品数组参数缺失', 1000001);
+        }
+
+        $response = $this->goodsClient->batchGoodsDeliveryPrice($infos);
+
+        return true;
     }
 }

@@ -27,4 +27,30 @@ class Client extends BaseClient
 
         return $this->httpPostJson('/api/cross_border/savenewgoods');
     }
+
+    /**
+     * 商品采购价格的同步.
+     *
+     * @throws ClientError
+     */
+    public function batchGoodsPurchasePrice(array $infos)
+    {
+        $this->setParams($infos);
+
+        return $this->httpPostJson('/api/cross_border/goodsPurchasePriceAdjust');
+    }
+
+    /**
+     * 商品门店配送价格同步.
+     *
+     * @throws ClientError
+     */
+    public function batchGoodsDeliveryPrice(array $infos)
+    {
+        $this->setParams($infos);
+
+        return $this->httpPostJson('/api/cross_border/goodsSalePriceAdjust');
+    }
+
+
 }
