@@ -20,6 +20,7 @@ class Application extends Container
         Allocate\ServiceProvider::class,
         AllocateTime\ServiceProvider::class,
         Order\ServiceProvider::class,
+        Returned\ServiceProvider::class,
     ];
 
     /**
