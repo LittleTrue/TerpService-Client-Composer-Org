@@ -21,6 +21,7 @@ class Application extends Container
         AllocateTime\ServiceProvider::class,
         Order\ServiceProvider::class,
         Returned\ServiceProvider::class,
+        SaleReturn\ServiceProvider::class,
     ];
 
     /**
